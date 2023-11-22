@@ -11,7 +11,8 @@ ctp-sys 目前支持 6.6.5.x(linux)版本， 对应 ctpapi(c++) 的生产版本:
 # 问题记录
 1. 使用相对路径时，wrapper.h 中头文件需要使用双引号，否则会报错`Unable to generate bindings: ClangDiagnostic("wrapper.h:1:10: error: 'ctp/6.6.7_20220304/linux64/tradeapi_se/ThostFtdcUserApiStruct.h' file not found with <angled> include; use \"quotes\" instead\n")`
 2. linux库名需要lib+"库名称"软连接后才能被ld读取找到
-3. c++的头文件需要使用wrapper.cpp引入，否则无法识别class关键字
+3. c++的头文件需要使用wrapper.hpp引入，否则无法识别class关键字：[Generating Bindings to C++](https://rust-lang.github.io/rust-bindgen/cpp.html)
+4. ctp 的.h文件中的方法定义`virtual void Release() = 0;`,无法生成绑定，转换成`void Release();`生成绑定正常。
 
 # 相关资源
 1. [API来源：上期技术官方网站](http://www.sfit.com.cn/5_2_DocumentDown_2.htm)

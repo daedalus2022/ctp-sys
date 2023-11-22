@@ -25,11 +25,11 @@ fn main() {
     println!("cargo:rustc-link-lib=thosttraderapi_se");
 
     // 告诉 cargo 当 wrapper.h 变化时重新运行，只有结构使用wrapper.h, 包含类定义使用wrapper.cpp
-    println!("cargo:rerun-if-changed=wrapper.cpp");
+    println!("cargo:rerun-if-changed=wrapper.hpp");
 
     // 配置 bindgen，并生成 Bindings 结构
     let bindings = bindgen::Builder::default()
-        .header("wrapper.cpp")
+        .header("wrapper.hpp")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .generate()
         .expect("Unable to generate bindings");

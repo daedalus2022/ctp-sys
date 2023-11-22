@@ -65260,42 +65260,38 @@ fn bindgen_test_layout_CThostFtdcSyncDeltaEWarrantOffsetField() {
     );
 }
 #[repr(C)]
-pub struct CThostFtdcMdSpi__bindgen_vtable(::std::os::raw::c_void);
-#[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CThostFtdcMdSpi {
-    pub vtable_: *const CThostFtdcMdSpi__bindgen_vtable,
+    pub _address: u8,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcMdSpi() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcMdSpi>(),
-        8usize,
+        1usize,
         concat!("Size of: ", stringify!(CThostFtdcMdSpi))
     );
     assert_eq!(
         ::std::mem::align_of::<CThostFtdcMdSpi>(),
-        8usize,
+        1usize,
         concat!("Alignment of ", stringify!(CThostFtdcMdSpi))
     );
 }
 #[repr(C)]
-pub struct CThostFtdcMdApi__bindgen_vtable(::std::os::raw::c_void);
-#[repr(C)]
 #[derive(Debug)]
 pub struct CThostFtdcMdApi {
-    pub vtable_: *const CThostFtdcMdApi__bindgen_vtable,
+    pub _address: u8,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcMdApi() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcMdApi>(),
-        8usize,
+        1usize,
         concat!("Size of: ", stringify!(CThostFtdcMdApi))
     );
     assert_eq!(
         ::std::mem::align_of::<CThostFtdcMdApi>(),
-        8usize,
+        1usize,
         concat!("Alignment of ", stringify!(CThostFtdcMdApi))
     );
 }
@@ -65313,6 +65309,120 @@ extern "C" {
     #[link_name = "\u{1}_ZN15CThostFtdcMdApi13GetApiVersionEv"]
     pub fn CThostFtdcMdApi_GetApiVersion() -> *const ::std::os::raw::c_char;
 }
+extern "C" {
+    #[doc = "删除接口对象本身\n@remark 不再使用本接口对象时,调用该函数删除接口对象"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi7ReleaseEv"]
+    pub fn CThostFtdcMdApi_Release(this: *mut CThostFtdcMdApi);
+}
+extern "C" {
+    #[doc = "初始化\n@remark 初始化运行环境,只有调用后,接口才开始工作"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi4InitEv"]
+    pub fn CThostFtdcMdApi_Init(this: *mut CThostFtdcMdApi);
+}
+extern "C" {
+    #[doc = "等待接口线程结束运行\n@return 线程退出代码"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi4JoinEv"]
+    pub fn CThostFtdcMdApi_Join(this: *mut CThostFtdcMdApi) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "获取当前交易日\n@retrun 获取到的交易日\n@remark 只有登录成功后,才能得到正确的交易日"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi13GetTradingDayEv"]
+    pub fn CThostFtdcMdApi_GetTradingDay(
+        this: *mut CThostFtdcMdApi,
+    ) -> *const ::std::os::raw::c_char;
+}
+extern "C" {
+    #[doc = "注册前置机网络地址\n@param pszFrontAddress：前置机网络地址。\n@remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:17001”。\n@remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”17001”代表服务器端口号。"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi13RegisterFrontEPc"]
+    pub fn CThostFtdcMdApi_RegisterFront(
+        this: *mut CThostFtdcMdApi,
+        pszFrontAddress: *mut ::std::os::raw::c_char,
+    );
+}
+extern "C" {
+    #[doc = "注册名字服务器网络地址\n@param pszNsAddress：名字服务器网络地址。\n@remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:12001”。\n@remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”12001”代表服务器端口号。\n@remark RegisterNameServer优先于RegisterFront"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi18RegisterNameServerEPc"]
+    pub fn CThostFtdcMdApi_RegisterNameServer(
+        this: *mut CThostFtdcMdApi,
+        pszNsAddress: *mut ::std::os::raw::c_char,
+    );
+}
+extern "C" {
+    #[doc = "注册名字服务器用户信息\n@param pFensUserInfo：用户信息。"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi20RegisterFensUserInfoEP27CThostFtdcFensUserInfoField"]
+    pub fn CThostFtdcMdApi_RegisterFensUserInfo(
+        this: *mut CThostFtdcMdApi,
+        pFensUserInfo: *mut CThostFtdcFensUserInfoField,
+    );
+}
+extern "C" {
+    #[doc = "注册回调接口\n@param pSpi 派生自回调接口类的实例"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi11RegisterSpiEP15CThostFtdcMdSpi"]
+    pub fn CThostFtdcMdApi_RegisterSpi(this: *mut CThostFtdcMdApi, pSpi: *mut CThostFtdcMdSpi);
+}
+extern "C" {
+    #[doc = "订阅行情。\n@param ppInstrumentID 合约ID\n@param nCount 要订阅/退订行情的合约个数\n@remark"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi19SubscribeMarketDataEPPci"]
+    pub fn CThostFtdcMdApi_SubscribeMarketData(
+        this: *mut CThostFtdcMdApi,
+        ppInstrumentID: *mut *mut ::std::os::raw::c_char,
+        nCount: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "退订行情。\n@param ppInstrumentID 合约ID\n@param nCount 要订阅/退订行情的合约个数\n@remark"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi21UnSubscribeMarketDataEPPci"]
+    pub fn CThostFtdcMdApi_UnSubscribeMarketData(
+        this: *mut CThostFtdcMdApi,
+        ppInstrumentID: *mut *mut ::std::os::raw::c_char,
+        nCount: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "订阅询价。\n@param ppInstrumentID 合约ID\n@param nCount 要订阅/退订行情的合约个数\n@remark"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi20SubscribeForQuoteRspEPPci"]
+    pub fn CThostFtdcMdApi_SubscribeForQuoteRsp(
+        this: *mut CThostFtdcMdApi,
+        ppInstrumentID: *mut *mut ::std::os::raw::c_char,
+        nCount: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "退订询价。\n@param ppInstrumentID 合约ID\n@param nCount 要订阅/退订行情的合约个数\n@remark"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi22UnSubscribeForQuoteRspEPPci"]
+    pub fn CThostFtdcMdApi_UnSubscribeForQuoteRsp(
+        this: *mut CThostFtdcMdApi,
+        ppInstrumentID: *mut *mut ::std::os::raw::c_char,
+        nCount: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "用户登录请求"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi12ReqUserLoginEP27CThostFtdcReqUserLoginFieldi"]
+    pub fn CThostFtdcMdApi_ReqUserLogin(
+        this: *mut CThostFtdcMdApi,
+        pReqUserLoginField: *mut CThostFtdcReqUserLoginField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "登出请求"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi13ReqUserLogoutEP25CThostFtdcUserLogoutFieldi"]
+    pub fn CThostFtdcMdApi_ReqUserLogout(
+        this: *mut CThostFtdcMdApi,
+        pUserLogout: *mut CThostFtdcUserLogoutField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询组播合约"]
+    #[link_name = "\u{1}_ZN15CThostFtdcMdApi25ReqQryMulticastInstrumentEP37CThostFtdcQryMulticastInstrumentFieldi"]
+    pub fn CThostFtdcMdApi_ReqQryMulticastInstrument(
+        this: *mut CThostFtdcMdApi,
+        pQryMulticastInstrument: *mut CThostFtdcQryMulticastInstrumentField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
 impl CThostFtdcMdApi {
     #[inline]
     pub unsafe fn CreateFtdcMdApi(
@@ -65326,44 +65436,128 @@ impl CThostFtdcMdApi {
     pub unsafe fn GetApiVersion() -> *const ::std::os::raw::c_char {
         CThostFtdcMdApi_GetApiVersion()
     }
+    #[inline]
+    pub unsafe fn Release(&mut self) {
+        CThostFtdcMdApi_Release(self)
+    }
+    #[inline]
+    pub unsafe fn Init(&mut self) {
+        CThostFtdcMdApi_Init(self)
+    }
+    #[inline]
+    pub unsafe fn Join(&mut self) -> ::std::os::raw::c_int {
+        CThostFtdcMdApi_Join(self)
+    }
+    #[inline]
+    pub unsafe fn GetTradingDay(&mut self) -> *const ::std::os::raw::c_char {
+        CThostFtdcMdApi_GetTradingDay(self)
+    }
+    #[inline]
+    pub unsafe fn RegisterFront(&mut self, pszFrontAddress: *mut ::std::os::raw::c_char) {
+        CThostFtdcMdApi_RegisterFront(self, pszFrontAddress)
+    }
+    #[inline]
+    pub unsafe fn RegisterNameServer(&mut self, pszNsAddress: *mut ::std::os::raw::c_char) {
+        CThostFtdcMdApi_RegisterNameServer(self, pszNsAddress)
+    }
+    #[inline]
+    pub unsafe fn RegisterFensUserInfo(&mut self, pFensUserInfo: *mut CThostFtdcFensUserInfoField) {
+        CThostFtdcMdApi_RegisterFensUserInfo(self, pFensUserInfo)
+    }
+    #[inline]
+    pub unsafe fn RegisterSpi(&mut self, pSpi: *mut CThostFtdcMdSpi) {
+        CThostFtdcMdApi_RegisterSpi(self, pSpi)
+    }
+    #[inline]
+    pub unsafe fn SubscribeMarketData(
+        &mut self,
+        ppInstrumentID: *mut *mut ::std::os::raw::c_char,
+        nCount: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcMdApi_SubscribeMarketData(self, ppInstrumentID, nCount)
+    }
+    #[inline]
+    pub unsafe fn UnSubscribeMarketData(
+        &mut self,
+        ppInstrumentID: *mut *mut ::std::os::raw::c_char,
+        nCount: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcMdApi_UnSubscribeMarketData(self, ppInstrumentID, nCount)
+    }
+    #[inline]
+    pub unsafe fn SubscribeForQuoteRsp(
+        &mut self,
+        ppInstrumentID: *mut *mut ::std::os::raw::c_char,
+        nCount: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcMdApi_SubscribeForQuoteRsp(self, ppInstrumentID, nCount)
+    }
+    #[inline]
+    pub unsafe fn UnSubscribeForQuoteRsp(
+        &mut self,
+        ppInstrumentID: *mut *mut ::std::os::raw::c_char,
+        nCount: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcMdApi_UnSubscribeForQuoteRsp(self, ppInstrumentID, nCount)
+    }
+    #[inline]
+    pub unsafe fn ReqUserLogin(
+        &mut self,
+        pReqUserLoginField: *mut CThostFtdcReqUserLoginField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcMdApi_ReqUserLogin(self, pReqUserLoginField, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqUserLogout(
+        &mut self,
+        pUserLogout: *mut CThostFtdcUserLogoutField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcMdApi_ReqUserLogout(self, pUserLogout, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryMulticastInstrument(
+        &mut self,
+        pQryMulticastInstrument: *mut CThostFtdcQryMulticastInstrumentField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcMdApi_ReqQryMulticastInstrument(self, pQryMulticastInstrument, nRequestID)
+    }
 }
-#[repr(C)]
-pub struct CThostFtdcTraderSpi__bindgen_vtable(::std::os::raw::c_void);
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct CThostFtdcTraderSpi {
-    pub vtable_: *const CThostFtdcTraderSpi__bindgen_vtable,
+    pub _address: u8,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcTraderSpi() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcTraderSpi>(),
-        8usize,
+        1usize,
         concat!("Size of: ", stringify!(CThostFtdcTraderSpi))
     );
     assert_eq!(
         ::std::mem::align_of::<CThostFtdcTraderSpi>(),
-        8usize,
+        1usize,
         concat!("Alignment of ", stringify!(CThostFtdcTraderSpi))
     );
 }
 #[repr(C)]
-pub struct CThostFtdcTraderApi__bindgen_vtable(::std::os::raw::c_void);
-#[repr(C)]
 #[derive(Debug)]
 pub struct CThostFtdcTraderApi {
-    pub vtable_: *const CThostFtdcTraderApi__bindgen_vtable,
+    pub _address: u8,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcTraderApi() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcTraderApi>(),
-        8usize,
+        1usize,
         concat!("Size of: ", stringify!(CThostFtdcTraderApi))
     );
     assert_eq!(
         ::std::mem::align_of::<CThostFtdcTraderApi>(),
-        8usize,
+        1usize,
         concat!("Alignment of ", stringify!(CThostFtdcTraderApi))
     );
 }
@@ -65379,6 +65573,875 @@ extern "C" {
     #[link_name = "\u{1}_ZN19CThostFtdcTraderApi13GetApiVersionEv"]
     pub fn CThostFtdcTraderApi_GetApiVersion() -> *const ::std::os::raw::c_char;
 }
+extern "C" {
+    #[doc = "删除接口对象本身\n@remark 不再使用本接口对象时,调用该函数删除接口对象"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi7ReleaseEv"]
+    pub fn CThostFtdcTraderApi_Release(this: *mut CThostFtdcTraderApi);
+}
+extern "C" {
+    #[doc = "初始化\n@remark 初始化运行环境,只有调用后,接口才开始工作"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi4InitEv"]
+    pub fn CThostFtdcTraderApi_Init(this: *mut CThostFtdcTraderApi);
+}
+extern "C" {
+    #[doc = "等待接口线程结束运行\n@return 线程退出代码"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi4JoinEv"]
+    pub fn CThostFtdcTraderApi_Join(this: *mut CThostFtdcTraderApi) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "获取当前交易日\n@retrun 获取到的交易日\n@remark 只有登录成功后,才能得到正确的交易日"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi13GetTradingDayEv"]
+    pub fn CThostFtdcTraderApi_GetTradingDay(
+        this: *mut CThostFtdcTraderApi,
+    ) -> *const ::std::os::raw::c_char;
+}
+extern "C" {
+    #[doc = "注册前置机网络地址\n@param pszFrontAddress：前置机网络地址。\n@remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:17001”。\n@remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”17001”代表服务器端口号。"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi13RegisterFrontEPc"]
+    pub fn CThostFtdcTraderApi_RegisterFront(
+        this: *mut CThostFtdcTraderApi,
+        pszFrontAddress: *mut ::std::os::raw::c_char,
+    );
+}
+extern "C" {
+    #[doc = "注册名字服务器网络地址\n@param pszNsAddress：名字服务器网络地址。\n@remark 网络地址的格式为：“protocol://ipaddress:port”，如：”tcp://127.0.0.1:12001”。\n@remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”12001”代表服务器端口号。\n@remark RegisterNameServer优先于RegisterFront"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi18RegisterNameServerEPc"]
+    pub fn CThostFtdcTraderApi_RegisterNameServer(
+        this: *mut CThostFtdcTraderApi,
+        pszNsAddress: *mut ::std::os::raw::c_char,
+    );
+}
+extern "C" {
+    #[doc = "注册名字服务器用户信息\n@param pFensUserInfo：用户信息。"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20RegisterFensUserInfoEP27CThostFtdcFensUserInfoField"]
+    pub fn CThostFtdcTraderApi_RegisterFensUserInfo(
+        this: *mut CThostFtdcTraderApi,
+        pFensUserInfo: *mut CThostFtdcFensUserInfoField,
+    );
+}
+extern "C" {
+    #[doc = "注册回调接口\n@param pSpi 派生自回调接口类的实例"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi11RegisterSpiEP19CThostFtdcTraderSpi"]
+    pub fn CThostFtdcTraderApi_RegisterSpi(
+        this: *mut CThostFtdcTraderApi,
+        pSpi: *mut CThostFtdcTraderSpi,
+    );
+}
+extern "C" {
+    #[doc = "订阅私有流。\n@param nResumeType 私有流重传方式\n        THOST_TERT_RESTART:从本交易日开始重传\n        THOST_TERT_RESUME:从上次收到的续传\n        THOST_TERT_QUICK:只传送登录后私有流的内容\n@remark 该方法要在Init方法前调用。若不调用则不会收到私有流的数据。"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi21SubscribePrivateTopicE20THOST_TE_RESUME_TYPE"]
+    pub fn CThostFtdcTraderApi_SubscribePrivateTopic(
+        this: *mut CThostFtdcTraderApi,
+        nResumeType: THOST_TE_RESUME_TYPE,
+    );
+}
+extern "C" {
+    #[doc = "订阅公共流。\n@param nResumeType 公共流重传方式\n        THOST_TERT_RESTART:从本交易日开始重传\n        THOST_TERT_RESUME:从上次收到的续传\n        THOST_TERT_QUICK:只传送登录后公共流的内容\n        THOST_TERT_NONE:取消订阅公共流\n@remark 该方法要在Init方法前调用。若不调用则不会收到公共流的数据。"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20SubscribePublicTopicE20THOST_TE_RESUME_TYPE"]
+    pub fn CThostFtdcTraderApi_SubscribePublicTopic(
+        this: *mut CThostFtdcTraderApi,
+        nResumeType: THOST_TE_RESUME_TYPE,
+    );
+}
+extern "C" {
+    #[doc = "客户端认证请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi15ReqAuthenticateEP30CThostFtdcReqAuthenticateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqAuthenticate(
+        this: *mut CThostFtdcTraderApi,
+        pReqAuthenticateField: *mut CThostFtdcReqAuthenticateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "注册用户终端信息，用于中继服务器多连接模式\n需要在终端认证成功后，用户登录前调用该接口"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi22RegisterUserSystemInfoEP29CThostFtdcUserSystemInfoField"]
+    pub fn CThostFtdcTraderApi_RegisterUserSystemInfo(
+        this: *mut CThostFtdcTraderApi,
+        pUserSystemInfo: *mut CThostFtdcUserSystemInfoField,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "上报用户终端信息，用于中继服务器操作员登录模式\n操作员登录后，可以多次调用该接口上报客户信息"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20SubmitUserSystemInfoEP29CThostFtdcUserSystemInfoField"]
+    pub fn CThostFtdcTraderApi_SubmitUserSystemInfo(
+        this: *mut CThostFtdcTraderApi,
+        pUserSystemInfo: *mut CThostFtdcUserSystemInfoField,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "用户登录请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi12ReqUserLoginEP27CThostFtdcReqUserLoginFieldi"]
+    pub fn CThostFtdcTraderApi_ReqUserLogin(
+        this: *mut CThostFtdcTraderApi,
+        pReqUserLoginField: *mut CThostFtdcReqUserLoginField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "登出请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi13ReqUserLogoutEP25CThostFtdcUserLogoutFieldi"]
+    pub fn CThostFtdcTraderApi_ReqUserLogout(
+        this: *mut CThostFtdcTraderApi,
+        pUserLogout: *mut CThostFtdcUserLogoutField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "用户口令更新请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi21ReqUserPasswordUpdateEP33CThostFtdcUserPasswordUpdateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqUserPasswordUpdate(
+        this: *mut CThostFtdcTraderApi,
+        pUserPasswordUpdate: *mut CThostFtdcUserPasswordUpdateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "资金账户口令更新请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi31ReqTradingAccountPasswordUpdateEP43CThostFtdcTradingAccountPasswordUpdateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqTradingAccountPasswordUpdate(
+        this: *mut CThostFtdcTraderApi,
+        pTradingAccountPasswordUpdate: *mut CThostFtdcTradingAccountPasswordUpdateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "查询用户当前支持的认证模式"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi17ReqUserAuthMethodEP32CThostFtdcReqUserAuthMethodFieldi"]
+    pub fn CThostFtdcTraderApi_ReqUserAuthMethod(
+        this: *mut CThostFtdcTraderApi,
+        pReqUserAuthMethod: *mut CThostFtdcReqUserAuthMethodField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "用户发出获取图形验证码请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi17ReqGenUserCaptchaEP32CThostFtdcReqGenUserCaptchaFieldi"]
+    pub fn CThostFtdcTraderApi_ReqGenUserCaptcha(
+        this: *mut CThostFtdcTraderApi,
+        pReqGenUserCaptcha: *mut CThostFtdcReqGenUserCaptchaField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "用户发出获取短信验证码请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi14ReqGenUserTextEP29CThostFtdcReqGenUserTextFieldi"]
+    pub fn CThostFtdcTraderApi_ReqGenUserText(
+        this: *mut CThostFtdcTraderApi,
+        pReqGenUserText: *mut CThostFtdcReqGenUserTextField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "用户发出带有图片验证码的登陆请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi23ReqUserLoginWithCaptchaEP38CThostFtdcReqUserLoginWithCaptchaFieldi"]
+    pub fn CThostFtdcTraderApi_ReqUserLoginWithCaptcha(
+        this: *mut CThostFtdcTraderApi,
+        pReqUserLoginWithCaptcha: *mut CThostFtdcReqUserLoginWithCaptchaField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "用户发出带有短信验证码的登陆请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20ReqUserLoginWithTextEP35CThostFtdcReqUserLoginWithTextFieldi"]
+    pub fn CThostFtdcTraderApi_ReqUserLoginWithText(
+        this: *mut CThostFtdcTraderApi,
+        pReqUserLoginWithText: *mut CThostFtdcReqUserLoginWithTextField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "用户发出带有动态口令的登陆请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi19ReqUserLoginWithOTPEP34CThostFtdcReqUserLoginWithOTPFieldi"]
+    pub fn CThostFtdcTraderApi_ReqUserLoginWithOTP(
+        this: *mut CThostFtdcTraderApi,
+        pReqUserLoginWithOTP: *mut CThostFtdcReqUserLoginWithOTPField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "报单录入请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi14ReqOrderInsertEP25CThostFtdcInputOrderFieldi"]
+    pub fn CThostFtdcTraderApi_ReqOrderInsert(
+        this: *mut CThostFtdcTraderApi,
+        pInputOrder: *mut CThostFtdcInputOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "预埋单录入请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20ReqParkedOrderInsertEP26CThostFtdcParkedOrderFieldi"]
+    pub fn CThostFtdcTraderApi_ReqParkedOrderInsert(
+        this: *mut CThostFtdcTraderApi,
+        pParkedOrder: *mut CThostFtdcParkedOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "预埋撤单录入请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20ReqParkedOrderActionEP32CThostFtdcParkedOrderActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqParkedOrderAction(
+        this: *mut CThostFtdcTraderApi,
+        pParkedOrderAction: *mut CThostFtdcParkedOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "报单操作请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi14ReqOrderActionEP31CThostFtdcInputOrderActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqOrderAction(
+        this: *mut CThostFtdcTraderApi,
+        pInputOrderAction: *mut CThostFtdcInputOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "查询最大报单数量请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20ReqQryMaxOrderVolumeEP32CThostFtdcQryMaxOrderVolumeFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryMaxOrderVolume(
+        this: *mut CThostFtdcTraderApi,
+        pQryMaxOrderVolume: *mut CThostFtdcQryMaxOrderVolumeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "投资者结算结果确认"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi24ReqSettlementInfoConfirmEP36CThostFtdcSettlementInfoConfirmFieldi"]
+    pub fn CThostFtdcTraderApi_ReqSettlementInfoConfirm(
+        this: *mut CThostFtdcTraderApi,
+        pSettlementInfoConfirm: *mut CThostFtdcSettlementInfoConfirmField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求删除预埋单"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20ReqRemoveParkedOrderEP32CThostFtdcRemoveParkedOrderFieldi"]
+    pub fn CThostFtdcTraderApi_ReqRemoveParkedOrder(
+        this: *mut CThostFtdcTraderApi,
+        pRemoveParkedOrder: *mut CThostFtdcRemoveParkedOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求删除预埋撤单"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi26ReqRemoveParkedOrderActionEP38CThostFtdcRemoveParkedOrderActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqRemoveParkedOrderAction(
+        this: *mut CThostFtdcTraderApi,
+        pRemoveParkedOrderAction: *mut CThostFtdcRemoveParkedOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "执行宣告录入请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi18ReqExecOrderInsertEP29CThostFtdcInputExecOrderFieldi"]
+    pub fn CThostFtdcTraderApi_ReqExecOrderInsert(
+        this: *mut CThostFtdcTraderApi,
+        pInputExecOrder: *mut CThostFtdcInputExecOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "执行宣告操作请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi18ReqExecOrderActionEP35CThostFtdcInputExecOrderActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqExecOrderAction(
+        this: *mut CThostFtdcTraderApi,
+        pInputExecOrderAction: *mut CThostFtdcInputExecOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "询价录入请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi17ReqForQuoteInsertEP28CThostFtdcInputForQuoteFieldi"]
+    pub fn CThostFtdcTraderApi_ReqForQuoteInsert(
+        this: *mut CThostFtdcTraderApi,
+        pInputForQuote: *mut CThostFtdcInputForQuoteField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "报价录入请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi14ReqQuoteInsertEP25CThostFtdcInputQuoteFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQuoteInsert(
+        this: *mut CThostFtdcTraderApi,
+        pInputQuote: *mut CThostFtdcInputQuoteField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "报价操作请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi14ReqQuoteActionEP31CThostFtdcInputQuoteActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQuoteAction(
+        this: *mut CThostFtdcTraderApi,
+        pInputQuoteAction: *mut CThostFtdcInputQuoteActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "批量报单操作请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi19ReqBatchOrderActionEP36CThostFtdcInputBatchOrderActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqBatchOrderAction(
+        this: *mut CThostFtdcTraderApi,
+        pInputBatchOrderAction: *mut CThostFtdcInputBatchOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "期权自对冲录入请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi24ReqOptionSelfCloseInsertEP35CThostFtdcInputOptionSelfCloseFieldi"]
+    pub fn CThostFtdcTraderApi_ReqOptionSelfCloseInsert(
+        this: *mut CThostFtdcTraderApi,
+        pInputOptionSelfClose: *mut CThostFtdcInputOptionSelfCloseField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "期权自对冲操作请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi24ReqOptionSelfCloseActionEP41CThostFtdcInputOptionSelfCloseActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqOptionSelfCloseAction(
+        this: *mut CThostFtdcTraderApi,
+        pInputOptionSelfCloseAction: *mut CThostFtdcInputOptionSelfCloseActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "申请组合录入请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi19ReqCombActionInsertEP30CThostFtdcInputCombActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqCombActionInsert(
+        this: *mut CThostFtdcTraderApi,
+        pInputCombAction: *mut CThostFtdcInputCombActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询报单"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi11ReqQryOrderEP23CThostFtdcQryOrderFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryOrder(
+        this: *mut CThostFtdcTraderApi,
+        pQryOrder: *mut CThostFtdcQryOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询成交"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi11ReqQryTradeEP23CThostFtdcQryTradeFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryTrade(
+        this: *mut CThostFtdcTraderApi,
+        pQryTrade: *mut CThostFtdcQryTradeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询投资者持仓"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi22ReqQryInvestorPositionEP34CThostFtdcQryInvestorPositionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInvestorPosition(
+        this: *mut CThostFtdcTraderApi,
+        pQryInvestorPosition: *mut CThostFtdcQryInvestorPositionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询资金账户"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20ReqQryTradingAccountEP32CThostFtdcQryTradingAccountFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryTradingAccount(
+        this: *mut CThostFtdcTraderApi,
+        pQryTradingAccount: *mut CThostFtdcQryTradingAccountField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询投资者"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi14ReqQryInvestorEP26CThostFtdcQryInvestorFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInvestor(
+        this: *mut CThostFtdcTraderApi,
+        pQryInvestor: *mut CThostFtdcQryInvestorField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询交易编码"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi17ReqQryTradingCodeEP29CThostFtdcQryTradingCodeFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryTradingCode(
+        this: *mut CThostFtdcTraderApi,
+        pQryTradingCode: *mut CThostFtdcQryTradingCodeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询合约保证金率"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi26ReqQryInstrumentMarginRateEP38CThostFtdcQryInstrumentMarginRateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInstrumentMarginRate(
+        this: *mut CThostFtdcTraderApi,
+        pQryInstrumentMarginRate: *mut CThostFtdcQryInstrumentMarginRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询合约手续费率"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi30ReqQryInstrumentCommissionRateEP42CThostFtdcQryInstrumentCommissionRateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInstrumentCommissionRate(
+        this: *mut CThostFtdcTraderApi,
+        pQryInstrumentCommissionRate: *mut CThostFtdcQryInstrumentCommissionRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询交易所"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi14ReqQryExchangeEP26CThostFtdcQryExchangeFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryExchange(
+        this: *mut CThostFtdcTraderApi,
+        pQryExchange: *mut CThostFtdcQryExchangeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询产品"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi13ReqQryProductEP25CThostFtdcQryProductFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryProduct(
+        this: *mut CThostFtdcTraderApi,
+        pQryProduct: *mut CThostFtdcQryProductField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询合约"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi16ReqQryInstrumentEP28CThostFtdcQryInstrumentFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInstrument(
+        this: *mut CThostFtdcTraderApi,
+        pQryInstrument: *mut CThostFtdcQryInstrumentField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询行情"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi21ReqQryDepthMarketDataEP33CThostFtdcQryDepthMarketDataFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryDepthMarketData(
+        this: *mut CThostFtdcTraderApi,
+        pQryDepthMarketData: *mut CThostFtdcQryDepthMarketDataField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询交易员报盘机"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi17ReqQryTraderOfferEP29CThostFtdcQryTraderOfferFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryTraderOffer(
+        this: *mut CThostFtdcTraderApi,
+        pQryTraderOffer: *mut CThostFtdcQryTraderOfferField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询投资者结算结果"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20ReqQrySettlementInfoEP32CThostFtdcQrySettlementInfoFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQrySettlementInfo(
+        this: *mut CThostFtdcTraderApi,
+        pQrySettlementInfo: *mut CThostFtdcQrySettlementInfoField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询转帐银行"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi18ReqQryTransferBankEP30CThostFtdcQryTransferBankFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryTransferBank(
+        this: *mut CThostFtdcTraderApi,
+        pQryTransferBank: *mut CThostFtdcQryTransferBankField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询投资者持仓明细"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi28ReqQryInvestorPositionDetailEP40CThostFtdcQryInvestorPositionDetailFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInvestorPositionDetail(
+        this: *mut CThostFtdcTraderApi,
+        pQryInvestorPositionDetail: *mut CThostFtdcQryInvestorPositionDetailField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询客户通知"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi12ReqQryNoticeEP24CThostFtdcQryNoticeFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryNotice(
+        this: *mut CThostFtdcTraderApi,
+        pQryNotice: *mut CThostFtdcQryNoticeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询结算信息确认"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi27ReqQrySettlementInfoConfirmEP39CThostFtdcQrySettlementInfoConfirmFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQrySettlementInfoConfirm(
+        this: *mut CThostFtdcTraderApi,
+        pQrySettlementInfoConfirm: *mut CThostFtdcQrySettlementInfoConfirmField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询投资者持仓明细"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi35ReqQryInvestorPositionCombineDetailEP47CThostFtdcQryInvestorPositionCombineDetailFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInvestorPositionCombineDetail(
+        this: *mut CThostFtdcTraderApi,
+        pQryInvestorPositionCombineDetail: *mut CThostFtdcQryInvestorPositionCombineDetailField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询保证金监管系统经纪公司资金账户密钥"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi28ReqQryCFMMCTradingAccountKeyEP40CThostFtdcQryCFMMCTradingAccountKeyFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryCFMMCTradingAccountKey(
+        this: *mut CThostFtdcTraderApi,
+        pQryCFMMCTradingAccountKey: *mut CThostFtdcQryCFMMCTradingAccountKeyField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询仓单折抵信息"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20ReqQryEWarrantOffsetEP32CThostFtdcQryEWarrantOffsetFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryEWarrantOffset(
+        this: *mut CThostFtdcTraderApi,
+        pQryEWarrantOffset: *mut CThostFtdcQryEWarrantOffsetField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询投资者品种/跨品种保证金"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi32ReqQryInvestorProductGroupMarginEP44CThostFtdcQryInvestorProductGroupMarginFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInvestorProductGroupMargin(
+        this: *mut CThostFtdcTraderApi,
+        pQryInvestorProductGroupMargin: *mut CThostFtdcQryInvestorProductGroupMarginField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询交易所保证金率"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi24ReqQryExchangeMarginRateEP36CThostFtdcQryExchangeMarginRateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryExchangeMarginRate(
+        this: *mut CThostFtdcTraderApi,
+        pQryExchangeMarginRate: *mut CThostFtdcQryExchangeMarginRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询交易所调整保证金率"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi30ReqQryExchangeMarginRateAdjustEP42CThostFtdcQryExchangeMarginRateAdjustFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryExchangeMarginRateAdjust(
+        this: *mut CThostFtdcTraderApi,
+        pQryExchangeMarginRateAdjust: *mut CThostFtdcQryExchangeMarginRateAdjustField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询汇率"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi18ReqQryExchangeRateEP30CThostFtdcQryExchangeRateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryExchangeRate(
+        this: *mut CThostFtdcTraderApi,
+        pQryExchangeRate: *mut CThostFtdcQryExchangeRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询二级代理操作员银期权限"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi21ReqQrySecAgentACIDMapEP33CThostFtdcQrySecAgentACIDMapFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQrySecAgentACIDMap(
+        this: *mut CThostFtdcTraderApi,
+        pQrySecAgentACIDMap: *mut CThostFtdcQrySecAgentACIDMapField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询产品报价汇率"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi21ReqQryProductExchRateEP33CThostFtdcQryProductExchRateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryProductExchRate(
+        this: *mut CThostFtdcTraderApi,
+        pQryProductExchRate: *mut CThostFtdcQryProductExchRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询产品组"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi18ReqQryProductGroupEP30CThostFtdcQryProductGroupFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryProductGroup(
+        this: *mut CThostFtdcTraderApi,
+        pQryProductGroup: *mut CThostFtdcQryProductGroupField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询做市商合约手续费率"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi32ReqQryMMInstrumentCommissionRateEP44CThostFtdcQryMMInstrumentCommissionRateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryMMInstrumentCommissionRate(
+        this: *mut CThostFtdcTraderApi,
+        pQryMMInstrumentCommissionRate: *mut CThostFtdcQryMMInstrumentCommissionRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询做市商期权合约手续费"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi27ReqQryMMOptionInstrCommRateEP39CThostFtdcQryMMOptionInstrCommRateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryMMOptionInstrCommRate(
+        this: *mut CThostFtdcTraderApi,
+        pQryMMOptionInstrCommRate: *mut CThostFtdcQryMMOptionInstrCommRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询报单手续费"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi29ReqQryInstrumentOrderCommRateEP41CThostFtdcQryInstrumentOrderCommRateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInstrumentOrderCommRate(
+        this: *mut CThostFtdcTraderApi,
+        pQryInstrumentOrderCommRate: *mut CThostFtdcQryInstrumentOrderCommRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询资金账户"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi28ReqQrySecAgentTradingAccountEP32CThostFtdcQryTradingAccountFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQrySecAgentTradingAccount(
+        this: *mut CThostFtdcTraderApi,
+        pQryTradingAccount: *mut CThostFtdcQryTradingAccountField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询二级代理商资金校验模式"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi23ReqQrySecAgentCheckModeEP35CThostFtdcQrySecAgentCheckModeFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQrySecAgentCheckMode(
+        this: *mut CThostFtdcTraderApi,
+        pQrySecAgentCheckMode: *mut CThostFtdcQrySecAgentCheckModeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询二级代理商信息"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi23ReqQrySecAgentTradeInfoEP35CThostFtdcQrySecAgentTradeInfoFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQrySecAgentTradeInfo(
+        this: *mut CThostFtdcTraderApi,
+        pQrySecAgentTradeInfo: *mut CThostFtdcQrySecAgentTradeInfoField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询期权交易成本"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi26ReqQryOptionInstrTradeCostEP38CThostFtdcQryOptionInstrTradeCostFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryOptionInstrTradeCost(
+        this: *mut CThostFtdcTraderApi,
+        pQryOptionInstrTradeCost: *mut CThostFtdcQryOptionInstrTradeCostField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询期权合约手续费"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi25ReqQryOptionInstrCommRateEP37CThostFtdcQryOptionInstrCommRateFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryOptionInstrCommRate(
+        this: *mut CThostFtdcTraderApi,
+        pQryOptionInstrCommRate: *mut CThostFtdcQryOptionInstrCommRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询执行宣告"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi15ReqQryExecOrderEP27CThostFtdcQryExecOrderFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryExecOrder(
+        this: *mut CThostFtdcTraderApi,
+        pQryExecOrder: *mut CThostFtdcQryExecOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询询价"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi14ReqQryForQuoteEP26CThostFtdcQryForQuoteFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryForQuote(
+        this: *mut CThostFtdcTraderApi,
+        pQryForQuote: *mut CThostFtdcQryForQuoteField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询报价"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi11ReqQryQuoteEP23CThostFtdcQryQuoteFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryQuote(
+        this: *mut CThostFtdcTraderApi,
+        pQryQuote: *mut CThostFtdcQryQuoteField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询期权自对冲"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi21ReqQryOptionSelfCloseEP33CThostFtdcQryOptionSelfCloseFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryOptionSelfClose(
+        this: *mut CThostFtdcTraderApi,
+        pQryOptionSelfClose: *mut CThostFtdcQryOptionSelfCloseField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询投资单元"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi16ReqQryInvestUnitEP28CThostFtdcQryInvestUnitFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryInvestUnit(
+        this: *mut CThostFtdcTraderApi,
+        pQryInvestUnit: *mut CThostFtdcQryInvestUnitField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询组合合约安全系数"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi25ReqQryCombInstrumentGuardEP37CThostFtdcQryCombInstrumentGuardFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryCombInstrumentGuard(
+        this: *mut CThostFtdcTraderApi,
+        pQryCombInstrumentGuard: *mut CThostFtdcQryCombInstrumentGuardField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询申请组合"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi16ReqQryCombActionEP28CThostFtdcQryCombActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryCombAction(
+        this: *mut CThostFtdcTraderApi,
+        pQryCombAction: *mut CThostFtdcQryCombActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询转帐流水"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi20ReqQryTransferSerialEP32CThostFtdcQryTransferSerialFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryTransferSerial(
+        this: *mut CThostFtdcTraderApi,
+        pQryTransferSerial: *mut CThostFtdcQryTransferSerialField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询银期签约关系"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi21ReqQryAccountregisterEP33CThostFtdcQryAccountregisterFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryAccountregister(
+        this: *mut CThostFtdcTraderApi,
+        pQryAccountregister: *mut CThostFtdcQryAccountregisterField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询签约银行"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi18ReqQryContractBankEP30CThostFtdcQryContractBankFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryContractBank(
+        this: *mut CThostFtdcTraderApi,
+        pQryContractBank: *mut CThostFtdcQryContractBankField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询预埋单"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi17ReqQryParkedOrderEP29CThostFtdcQryParkedOrderFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryParkedOrder(
+        this: *mut CThostFtdcTraderApi,
+        pQryParkedOrder: *mut CThostFtdcQryParkedOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询预埋撤单"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi23ReqQryParkedOrderActionEP35CThostFtdcQryParkedOrderActionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryParkedOrderAction(
+        this: *mut CThostFtdcTraderApi,
+        pQryParkedOrderAction: *mut CThostFtdcQryParkedOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询交易通知"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi19ReqQryTradingNoticeEP31CThostFtdcQryTradingNoticeFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryTradingNotice(
+        this: *mut CThostFtdcTraderApi,
+        pQryTradingNotice: *mut CThostFtdcQryTradingNoticeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询经纪公司交易参数"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi25ReqQryBrokerTradingParamsEP37CThostFtdcQryBrokerTradingParamsFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryBrokerTradingParams(
+        this: *mut CThostFtdcTraderApi,
+        pQryBrokerTradingParams: *mut CThostFtdcQryBrokerTradingParamsField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询经纪公司交易算法"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi24ReqQryBrokerTradingAlgosEP36CThostFtdcQryBrokerTradingAlgosFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryBrokerTradingAlgos(
+        this: *mut CThostFtdcTraderApi,
+        pQryBrokerTradingAlgos: *mut CThostFtdcQryBrokerTradingAlgosField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询监控中心用户令牌"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi32ReqQueryCFMMCTradingAccountTokenEP44CThostFtdcQueryCFMMCTradingAccountTokenFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQueryCFMMCTradingAccountToken(
+        this: *mut CThostFtdcTraderApi,
+        pQueryCFMMCTradingAccountToken: *mut CThostFtdcQueryCFMMCTradingAccountTokenField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "期货发起银行资金转期货请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi27ReqFromBankToFutureByFutureEP26CThostFtdcReqTransferFieldi"]
+    pub fn CThostFtdcTraderApi_ReqFromBankToFutureByFuture(
+        this: *mut CThostFtdcTraderApi,
+        pReqTransfer: *mut CThostFtdcReqTransferField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "期货发起期货资金转银行请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi27ReqFromFutureToBankByFutureEP26CThostFtdcReqTransferFieldi"]
+    pub fn CThostFtdcTraderApi_ReqFromFutureToBankByFuture(
+        this: *mut CThostFtdcTraderApi,
+        pReqTransfer: *mut CThostFtdcReqTransferField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "期货发起查询银行余额请求"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi32ReqQueryBankAccountMoneyByFutureEP30CThostFtdcReqQueryAccountFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQueryBankAccountMoneyByFuture(
+        this: *mut CThostFtdcTraderApi,
+        pReqQueryAccount: *mut CThostFtdcReqQueryAccountField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求查询分类合约"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi26ReqQryClassifiedInstrumentEP38CThostFtdcQryClassifiedInstrumentFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryClassifiedInstrument(
+        this: *mut CThostFtdcTraderApi,
+        pQryClassifiedInstrument: *mut CThostFtdcQryClassifiedInstrumentField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "请求组合优惠比例"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi24ReqQryCombPromotionParamEP36CThostFtdcQryCombPromotionParamFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryCombPromotionParam(
+        this: *mut CThostFtdcTraderApi,
+        pQryCombPromotionParam: *mut CThostFtdcQryCombPromotionParamField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "投资者风险结算持仓查询"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi29ReqQryRiskSettleInvstPositionEP41CThostFtdcQryRiskSettleInvstPositionFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryRiskSettleInvstPosition(
+        this: *mut CThostFtdcTraderApi,
+        pQryRiskSettleInvstPosition: *mut CThostFtdcQryRiskSettleInvstPositionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = "风险结算产品查询"]
+    #[link_name = "\u{1}_ZN19CThostFtdcTraderApi29ReqQryRiskSettleProductStatusEP41CThostFtdcQryRiskSettleProductStatusFieldi"]
+    pub fn CThostFtdcTraderApi_ReqQryRiskSettleProductStatus(
+        this: *mut CThostFtdcTraderApi,
+        pQryRiskSettleProductStatus: *mut CThostFtdcQryRiskSettleProductStatusField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
 impl CThostFtdcTraderApi {
     #[inline]
     pub unsafe fn CreateFtdcTraderApi(
@@ -65389,5 +66452,803 @@ impl CThostFtdcTraderApi {
     #[inline]
     pub unsafe fn GetApiVersion() -> *const ::std::os::raw::c_char {
         CThostFtdcTraderApi_GetApiVersion()
+    }
+    #[inline]
+    pub unsafe fn Release(&mut self) {
+        CThostFtdcTraderApi_Release(self)
+    }
+    #[inline]
+    pub unsafe fn Init(&mut self) {
+        CThostFtdcTraderApi_Init(self)
+    }
+    #[inline]
+    pub unsafe fn Join(&mut self) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_Join(self)
+    }
+    #[inline]
+    pub unsafe fn GetTradingDay(&mut self) -> *const ::std::os::raw::c_char {
+        CThostFtdcTraderApi_GetTradingDay(self)
+    }
+    #[inline]
+    pub unsafe fn RegisterFront(&mut self, pszFrontAddress: *mut ::std::os::raw::c_char) {
+        CThostFtdcTraderApi_RegisterFront(self, pszFrontAddress)
+    }
+    #[inline]
+    pub unsafe fn RegisterNameServer(&mut self, pszNsAddress: *mut ::std::os::raw::c_char) {
+        CThostFtdcTraderApi_RegisterNameServer(self, pszNsAddress)
+    }
+    #[inline]
+    pub unsafe fn RegisterFensUserInfo(&mut self, pFensUserInfo: *mut CThostFtdcFensUserInfoField) {
+        CThostFtdcTraderApi_RegisterFensUserInfo(self, pFensUserInfo)
+    }
+    #[inline]
+    pub unsafe fn RegisterSpi(&mut self, pSpi: *mut CThostFtdcTraderSpi) {
+        CThostFtdcTraderApi_RegisterSpi(self, pSpi)
+    }
+    #[inline]
+    pub unsafe fn SubscribePrivateTopic(&mut self, nResumeType: THOST_TE_RESUME_TYPE) {
+        CThostFtdcTraderApi_SubscribePrivateTopic(self, nResumeType)
+    }
+    #[inline]
+    pub unsafe fn SubscribePublicTopic(&mut self, nResumeType: THOST_TE_RESUME_TYPE) {
+        CThostFtdcTraderApi_SubscribePublicTopic(self, nResumeType)
+    }
+    #[inline]
+    pub unsafe fn ReqAuthenticate(
+        &mut self,
+        pReqAuthenticateField: *mut CThostFtdcReqAuthenticateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqAuthenticate(self, pReqAuthenticateField, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn RegisterUserSystemInfo(
+        &mut self,
+        pUserSystemInfo: *mut CThostFtdcUserSystemInfoField,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_RegisterUserSystemInfo(self, pUserSystemInfo)
+    }
+    #[inline]
+    pub unsafe fn SubmitUserSystemInfo(
+        &mut self,
+        pUserSystemInfo: *mut CThostFtdcUserSystemInfoField,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_SubmitUserSystemInfo(self, pUserSystemInfo)
+    }
+    #[inline]
+    pub unsafe fn ReqUserLogin(
+        &mut self,
+        pReqUserLoginField: *mut CThostFtdcReqUserLoginField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqUserLogin(self, pReqUserLoginField, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqUserLogout(
+        &mut self,
+        pUserLogout: *mut CThostFtdcUserLogoutField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqUserLogout(self, pUserLogout, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqUserPasswordUpdate(
+        &mut self,
+        pUserPasswordUpdate: *mut CThostFtdcUserPasswordUpdateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqUserPasswordUpdate(self, pUserPasswordUpdate, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqTradingAccountPasswordUpdate(
+        &mut self,
+        pTradingAccountPasswordUpdate: *mut CThostFtdcTradingAccountPasswordUpdateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqTradingAccountPasswordUpdate(
+            self,
+            pTradingAccountPasswordUpdate,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqUserAuthMethod(
+        &mut self,
+        pReqUserAuthMethod: *mut CThostFtdcReqUserAuthMethodField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqUserAuthMethod(self, pReqUserAuthMethod, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqGenUserCaptcha(
+        &mut self,
+        pReqGenUserCaptcha: *mut CThostFtdcReqGenUserCaptchaField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqGenUserCaptcha(self, pReqGenUserCaptcha, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqGenUserText(
+        &mut self,
+        pReqGenUserText: *mut CThostFtdcReqGenUserTextField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqGenUserText(self, pReqGenUserText, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqUserLoginWithCaptcha(
+        &mut self,
+        pReqUserLoginWithCaptcha: *mut CThostFtdcReqUserLoginWithCaptchaField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqUserLoginWithCaptcha(self, pReqUserLoginWithCaptcha, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqUserLoginWithText(
+        &mut self,
+        pReqUserLoginWithText: *mut CThostFtdcReqUserLoginWithTextField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqUserLoginWithText(self, pReqUserLoginWithText, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqUserLoginWithOTP(
+        &mut self,
+        pReqUserLoginWithOTP: *mut CThostFtdcReqUserLoginWithOTPField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqUserLoginWithOTP(self, pReqUserLoginWithOTP, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqOrderInsert(
+        &mut self,
+        pInputOrder: *mut CThostFtdcInputOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqOrderInsert(self, pInputOrder, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqParkedOrderInsert(
+        &mut self,
+        pParkedOrder: *mut CThostFtdcParkedOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqParkedOrderInsert(self, pParkedOrder, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqParkedOrderAction(
+        &mut self,
+        pParkedOrderAction: *mut CThostFtdcParkedOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqParkedOrderAction(self, pParkedOrderAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqOrderAction(
+        &mut self,
+        pInputOrderAction: *mut CThostFtdcInputOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqOrderAction(self, pInputOrderAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryMaxOrderVolume(
+        &mut self,
+        pQryMaxOrderVolume: *mut CThostFtdcQryMaxOrderVolumeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryMaxOrderVolume(self, pQryMaxOrderVolume, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqSettlementInfoConfirm(
+        &mut self,
+        pSettlementInfoConfirm: *mut CThostFtdcSettlementInfoConfirmField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqSettlementInfoConfirm(self, pSettlementInfoConfirm, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqRemoveParkedOrder(
+        &mut self,
+        pRemoveParkedOrder: *mut CThostFtdcRemoveParkedOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqRemoveParkedOrder(self, pRemoveParkedOrder, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqRemoveParkedOrderAction(
+        &mut self,
+        pRemoveParkedOrderAction: *mut CThostFtdcRemoveParkedOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqRemoveParkedOrderAction(self, pRemoveParkedOrderAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqExecOrderInsert(
+        &mut self,
+        pInputExecOrder: *mut CThostFtdcInputExecOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqExecOrderInsert(self, pInputExecOrder, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqExecOrderAction(
+        &mut self,
+        pInputExecOrderAction: *mut CThostFtdcInputExecOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqExecOrderAction(self, pInputExecOrderAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqForQuoteInsert(
+        &mut self,
+        pInputForQuote: *mut CThostFtdcInputForQuoteField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqForQuoteInsert(self, pInputForQuote, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQuoteInsert(
+        &mut self,
+        pInputQuote: *mut CThostFtdcInputQuoteField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQuoteInsert(self, pInputQuote, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQuoteAction(
+        &mut self,
+        pInputQuoteAction: *mut CThostFtdcInputQuoteActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQuoteAction(self, pInputQuoteAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqBatchOrderAction(
+        &mut self,
+        pInputBatchOrderAction: *mut CThostFtdcInputBatchOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqBatchOrderAction(self, pInputBatchOrderAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqOptionSelfCloseInsert(
+        &mut self,
+        pInputOptionSelfClose: *mut CThostFtdcInputOptionSelfCloseField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqOptionSelfCloseInsert(self, pInputOptionSelfClose, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqOptionSelfCloseAction(
+        &mut self,
+        pInputOptionSelfCloseAction: *mut CThostFtdcInputOptionSelfCloseActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqOptionSelfCloseAction(self, pInputOptionSelfCloseAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqCombActionInsert(
+        &mut self,
+        pInputCombAction: *mut CThostFtdcInputCombActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqCombActionInsert(self, pInputCombAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryOrder(
+        &mut self,
+        pQryOrder: *mut CThostFtdcQryOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryOrder(self, pQryOrder, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryTrade(
+        &mut self,
+        pQryTrade: *mut CThostFtdcQryTradeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryTrade(self, pQryTrade, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInvestorPosition(
+        &mut self,
+        pQryInvestorPosition: *mut CThostFtdcQryInvestorPositionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInvestorPosition(self, pQryInvestorPosition, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryTradingAccount(
+        &mut self,
+        pQryTradingAccount: *mut CThostFtdcQryTradingAccountField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryTradingAccount(self, pQryTradingAccount, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInvestor(
+        &mut self,
+        pQryInvestor: *mut CThostFtdcQryInvestorField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInvestor(self, pQryInvestor, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryTradingCode(
+        &mut self,
+        pQryTradingCode: *mut CThostFtdcQryTradingCodeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryTradingCode(self, pQryTradingCode, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInstrumentMarginRate(
+        &mut self,
+        pQryInstrumentMarginRate: *mut CThostFtdcQryInstrumentMarginRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInstrumentMarginRate(self, pQryInstrumentMarginRate, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInstrumentCommissionRate(
+        &mut self,
+        pQryInstrumentCommissionRate: *mut CThostFtdcQryInstrumentCommissionRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInstrumentCommissionRate(
+            self,
+            pQryInstrumentCommissionRate,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqQryExchange(
+        &mut self,
+        pQryExchange: *mut CThostFtdcQryExchangeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryExchange(self, pQryExchange, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryProduct(
+        &mut self,
+        pQryProduct: *mut CThostFtdcQryProductField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryProduct(self, pQryProduct, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInstrument(
+        &mut self,
+        pQryInstrument: *mut CThostFtdcQryInstrumentField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInstrument(self, pQryInstrument, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryDepthMarketData(
+        &mut self,
+        pQryDepthMarketData: *mut CThostFtdcQryDepthMarketDataField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryDepthMarketData(self, pQryDepthMarketData, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryTraderOffer(
+        &mut self,
+        pQryTraderOffer: *mut CThostFtdcQryTraderOfferField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryTraderOffer(self, pQryTraderOffer, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQrySettlementInfo(
+        &mut self,
+        pQrySettlementInfo: *mut CThostFtdcQrySettlementInfoField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQrySettlementInfo(self, pQrySettlementInfo, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryTransferBank(
+        &mut self,
+        pQryTransferBank: *mut CThostFtdcQryTransferBankField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryTransferBank(self, pQryTransferBank, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInvestorPositionDetail(
+        &mut self,
+        pQryInvestorPositionDetail: *mut CThostFtdcQryInvestorPositionDetailField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInvestorPositionDetail(
+            self,
+            pQryInvestorPositionDetail,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqQryNotice(
+        &mut self,
+        pQryNotice: *mut CThostFtdcQryNoticeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryNotice(self, pQryNotice, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQrySettlementInfoConfirm(
+        &mut self,
+        pQrySettlementInfoConfirm: *mut CThostFtdcQrySettlementInfoConfirmField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQrySettlementInfoConfirm(self, pQrySettlementInfoConfirm, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInvestorPositionCombineDetail(
+        &mut self,
+        pQryInvestorPositionCombineDetail: *mut CThostFtdcQryInvestorPositionCombineDetailField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInvestorPositionCombineDetail(
+            self,
+            pQryInvestorPositionCombineDetail,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqQryCFMMCTradingAccountKey(
+        &mut self,
+        pQryCFMMCTradingAccountKey: *mut CThostFtdcQryCFMMCTradingAccountKeyField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryCFMMCTradingAccountKey(
+            self,
+            pQryCFMMCTradingAccountKey,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqQryEWarrantOffset(
+        &mut self,
+        pQryEWarrantOffset: *mut CThostFtdcQryEWarrantOffsetField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryEWarrantOffset(self, pQryEWarrantOffset, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInvestorProductGroupMargin(
+        &mut self,
+        pQryInvestorProductGroupMargin: *mut CThostFtdcQryInvestorProductGroupMarginField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInvestorProductGroupMargin(
+            self,
+            pQryInvestorProductGroupMargin,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqQryExchangeMarginRate(
+        &mut self,
+        pQryExchangeMarginRate: *mut CThostFtdcQryExchangeMarginRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryExchangeMarginRate(self, pQryExchangeMarginRate, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryExchangeMarginRateAdjust(
+        &mut self,
+        pQryExchangeMarginRateAdjust: *mut CThostFtdcQryExchangeMarginRateAdjustField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryExchangeMarginRateAdjust(
+            self,
+            pQryExchangeMarginRateAdjust,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqQryExchangeRate(
+        &mut self,
+        pQryExchangeRate: *mut CThostFtdcQryExchangeRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryExchangeRate(self, pQryExchangeRate, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQrySecAgentACIDMap(
+        &mut self,
+        pQrySecAgentACIDMap: *mut CThostFtdcQrySecAgentACIDMapField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQrySecAgentACIDMap(self, pQrySecAgentACIDMap, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryProductExchRate(
+        &mut self,
+        pQryProductExchRate: *mut CThostFtdcQryProductExchRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryProductExchRate(self, pQryProductExchRate, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryProductGroup(
+        &mut self,
+        pQryProductGroup: *mut CThostFtdcQryProductGroupField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryProductGroup(self, pQryProductGroup, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryMMInstrumentCommissionRate(
+        &mut self,
+        pQryMMInstrumentCommissionRate: *mut CThostFtdcQryMMInstrumentCommissionRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryMMInstrumentCommissionRate(
+            self,
+            pQryMMInstrumentCommissionRate,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqQryMMOptionInstrCommRate(
+        &mut self,
+        pQryMMOptionInstrCommRate: *mut CThostFtdcQryMMOptionInstrCommRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryMMOptionInstrCommRate(self, pQryMMOptionInstrCommRate, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInstrumentOrderCommRate(
+        &mut self,
+        pQryInstrumentOrderCommRate: *mut CThostFtdcQryInstrumentOrderCommRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInstrumentOrderCommRate(
+            self,
+            pQryInstrumentOrderCommRate,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqQrySecAgentTradingAccount(
+        &mut self,
+        pQryTradingAccount: *mut CThostFtdcQryTradingAccountField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQrySecAgentTradingAccount(self, pQryTradingAccount, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQrySecAgentCheckMode(
+        &mut self,
+        pQrySecAgentCheckMode: *mut CThostFtdcQrySecAgentCheckModeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQrySecAgentCheckMode(self, pQrySecAgentCheckMode, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQrySecAgentTradeInfo(
+        &mut self,
+        pQrySecAgentTradeInfo: *mut CThostFtdcQrySecAgentTradeInfoField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQrySecAgentTradeInfo(self, pQrySecAgentTradeInfo, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryOptionInstrTradeCost(
+        &mut self,
+        pQryOptionInstrTradeCost: *mut CThostFtdcQryOptionInstrTradeCostField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryOptionInstrTradeCost(self, pQryOptionInstrTradeCost, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryOptionInstrCommRate(
+        &mut self,
+        pQryOptionInstrCommRate: *mut CThostFtdcQryOptionInstrCommRateField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryOptionInstrCommRate(self, pQryOptionInstrCommRate, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryExecOrder(
+        &mut self,
+        pQryExecOrder: *mut CThostFtdcQryExecOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryExecOrder(self, pQryExecOrder, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryForQuote(
+        &mut self,
+        pQryForQuote: *mut CThostFtdcQryForQuoteField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryForQuote(self, pQryForQuote, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryQuote(
+        &mut self,
+        pQryQuote: *mut CThostFtdcQryQuoteField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryQuote(self, pQryQuote, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryOptionSelfClose(
+        &mut self,
+        pQryOptionSelfClose: *mut CThostFtdcQryOptionSelfCloseField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryOptionSelfClose(self, pQryOptionSelfClose, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryInvestUnit(
+        &mut self,
+        pQryInvestUnit: *mut CThostFtdcQryInvestUnitField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryInvestUnit(self, pQryInvestUnit, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryCombInstrumentGuard(
+        &mut self,
+        pQryCombInstrumentGuard: *mut CThostFtdcQryCombInstrumentGuardField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryCombInstrumentGuard(self, pQryCombInstrumentGuard, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryCombAction(
+        &mut self,
+        pQryCombAction: *mut CThostFtdcQryCombActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryCombAction(self, pQryCombAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryTransferSerial(
+        &mut self,
+        pQryTransferSerial: *mut CThostFtdcQryTransferSerialField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryTransferSerial(self, pQryTransferSerial, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryAccountregister(
+        &mut self,
+        pQryAccountregister: *mut CThostFtdcQryAccountregisterField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryAccountregister(self, pQryAccountregister, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryContractBank(
+        &mut self,
+        pQryContractBank: *mut CThostFtdcQryContractBankField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryContractBank(self, pQryContractBank, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryParkedOrder(
+        &mut self,
+        pQryParkedOrder: *mut CThostFtdcQryParkedOrderField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryParkedOrder(self, pQryParkedOrder, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryParkedOrderAction(
+        &mut self,
+        pQryParkedOrderAction: *mut CThostFtdcQryParkedOrderActionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryParkedOrderAction(self, pQryParkedOrderAction, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryTradingNotice(
+        &mut self,
+        pQryTradingNotice: *mut CThostFtdcQryTradingNoticeField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryTradingNotice(self, pQryTradingNotice, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryBrokerTradingParams(
+        &mut self,
+        pQryBrokerTradingParams: *mut CThostFtdcQryBrokerTradingParamsField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryBrokerTradingParams(self, pQryBrokerTradingParams, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryBrokerTradingAlgos(
+        &mut self,
+        pQryBrokerTradingAlgos: *mut CThostFtdcQryBrokerTradingAlgosField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryBrokerTradingAlgos(self, pQryBrokerTradingAlgos, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQueryCFMMCTradingAccountToken(
+        &mut self,
+        pQueryCFMMCTradingAccountToken: *mut CThostFtdcQueryCFMMCTradingAccountTokenField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQueryCFMMCTradingAccountToken(
+            self,
+            pQueryCFMMCTradingAccountToken,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqFromBankToFutureByFuture(
+        &mut self,
+        pReqTransfer: *mut CThostFtdcReqTransferField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqFromBankToFutureByFuture(self, pReqTransfer, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqFromFutureToBankByFuture(
+        &mut self,
+        pReqTransfer: *mut CThostFtdcReqTransferField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqFromFutureToBankByFuture(self, pReqTransfer, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQueryBankAccountMoneyByFuture(
+        &mut self,
+        pReqQueryAccount: *mut CThostFtdcReqQueryAccountField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQueryBankAccountMoneyByFuture(self, pReqQueryAccount, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryClassifiedInstrument(
+        &mut self,
+        pQryClassifiedInstrument: *mut CThostFtdcQryClassifiedInstrumentField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryClassifiedInstrument(self, pQryClassifiedInstrument, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryCombPromotionParam(
+        &mut self,
+        pQryCombPromotionParam: *mut CThostFtdcQryCombPromotionParamField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryCombPromotionParam(self, pQryCombPromotionParam, nRequestID)
+    }
+    #[inline]
+    pub unsafe fn ReqQryRiskSettleInvstPosition(
+        &mut self,
+        pQryRiskSettleInvstPosition: *mut CThostFtdcQryRiskSettleInvstPositionField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryRiskSettleInvstPosition(
+            self,
+            pQryRiskSettleInvstPosition,
+            nRequestID,
+        )
+    }
+    #[inline]
+    pub unsafe fn ReqQryRiskSettleProductStatus(
+        &mut self,
+        pQryRiskSettleProductStatus: *mut CThostFtdcQryRiskSettleProductStatusField,
+        nRequestID: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int {
+        CThostFtdcTraderApi_ReqQryRiskSettleProductStatus(
+            self,
+            pQryRiskSettleProductStatus,
+            nRequestID,
+        )
     }
 }
