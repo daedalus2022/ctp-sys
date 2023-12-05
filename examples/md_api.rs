@@ -1,7 +1,7 @@
 use std::{fs, io::Write, path::Path};
 
 use ctp_sys::{
-    print_rsp_info, set_cstr_from_str_truncate_i8, CThostFtdcReqUserLoginField, CtpAccountConfig,
+    print_rsp_info, set_cstr_from_str_truncate_i8, CThostFtdcReqUserLoginField, CtpAccountConfig, gb18030_cstr_to_str, trading_day_from_ctp_trading_day, ascii_cstr_to_str, ascii_cstr_to_str_i8,
 };
 use futures::StreamExt;
 use tracing::info;
@@ -18,7 +18,8 @@ async fn main() {
         broker_id: "9999".to_string(),
         account: "-".to_string(),
         trade_front: "tcp://180.168.146.187:10201".to_string(),
-        md_front: "tcp://180.168.146.187:10131".to_string(),
+        // md_front: "tcp://180.168.146.187:10131".to_string(),
+        md_front: "tcp://180.168.146.187:10211".to_string(),
         name_server: "".to_string(),
         auth_code: "0000000000000000".to_string(),
         user_product_info: "".to_string(),
@@ -103,6 +104,38 @@ async fn md(ca: &CtpAccountConfig) {
             }
             OnRtnDepthMarketData(ref md) => {
                 info!("md={:?}", md);
+
+                if let Some(dmd) = md.p_depth_market_data{
+                    info!("交易日期: TradingDay:{:?}", trading_day_from_ctp_trading_day(&dmd.TradingDay));
+                    info!("品种（保留字段）: reserve1:{:?}", ascii_cstr_to_str_i8(&dmd.reserve1));
+                    info!("交易所代码: ExchangeID::{:?}", ascii_cstr_to_str_i8(&dmd.ExchangeID));
+                    info!("空（保留字段）: reserve2::{:?}", ascii_cstr_to_str_i8(&dmd.reserve2));
+                    info!("最新价: LastPrice::{:?}", &dmd.LastPrice);
+                    info!("上次结算价: PreSettlementPrice:::{:?}", &dmd.PreSettlementPrice);
+                    info!("昨收盘: PreClosePrice:::{:?}", &dmd.PreClosePrice);
+                    info!("昨持仓量: PreOpenInterest:::{:?}", &dmd.PreOpenInterest);
+                    info!("今开盘: OpenPrice:::{:?}", &dmd.OpenPrice);
+                    info!("最高价: HighestPrice:::{:?}", &dmd.HighestPrice);
+                    info!("最低价: LowestPrice:::{:?}", &dmd.LowestPrice);
+                    info!("数量: Volume:::{:?}", &dmd.Volume);
+                    info!("成交金额: Turnover:::{:?}", &dmd.Turnover);
+                    info!("持仓量: OpenInterest:::{:?}", &dmd.OpenInterest);
+                    info!("今收盘: ClosePrice:::{:?}", &dmd.ClosePrice);
+                    info!("本次结算价: SettlementPrice::::{:?}", &dmd.SettlementPrice);
+                    info!("涨停板价: UpperLimitPrice:::{:?}", &dmd.UpperLimitPrice);
+                    info!("跌停板价: LowerLimitPrice:::{:?}", &dmd.LowerLimitPrice);
+                    info!("昨虚实度: PreDelta:::{:?}", &dmd.PreDelta);
+                    info!("今虚实度: CurrDelta:::{:?}", &dmd.CurrDelta);
+                    info!("最后修改时间: UpdateTime:::{:?}", ascii_cstr_to_str_i8(&dmd.UpdateTime));
+                    info!("最后修改毫秒: UpdateMillisec:::{:?}", &dmd.UpdateMillisec);
+                    info!("当日均价: AveragePrice:::{:?}", &dmd.AveragePrice);
+                    info!("业务日期: ActionDay:::{:?}", trading_day_from_ctp_trading_day(&dmd.ActionDay));
+                    info!("合约代码: InstrumentID:::{:?}", ascii_cstr_to_str_i8(&dmd.InstrumentID));
+                    info!("合约在交易所的代码: ExchangeInstID:::{:?}", ascii_cstr_to_str_i8(&dmd.ExchangeInstID));
+                    info!("上带价: BandingUpperPrice:::{:?}", &dmd.BandingUpperPrice);
+                    info!("下带价: BandingLowerPrice:::{:?}", &dmd.BandingLowerPrice);
+
+                }
             }
             _ => {}
         }
